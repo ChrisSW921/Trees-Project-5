@@ -73,17 +73,26 @@ class BinarySearchTree:
         self.count = 0
 
         def remove_helper_2(item):
-            left = item.left_child
-            while left.right_child:
-                self.search_parent = left
-                left = left.right_child
-                self.count += 1
+            print("Here")
+            if item.left_child and not item.right_child:
+                self.parent.left_child = item.left_child
+            elif item.right_child and not item.left_child:
+                self.parent.right_child = item.right_child
+            elif not item.right_child and not item.left_child:
+                self.parent.right_child = None
+                self.parent.left_child = None
             else:
-                item.data = left.data
-                if self.count == 0:
-                    item.left_child = item.left_child.left_child
+                left = item.left_child
+                while left.right_child:
+                    self.search_parent = left
+                    left = left.right_child
+                    self.count += 1
                 else:
-                    self.search_parent.right_child = self.search_parent.right_child.left_child
+                    item.data = left.data
+                    if self.count == 0:
+                        item.left_child = item.left_child.left_child
+                    else:
+                        self.search_parent.right_child = self.search_parent.right_child.left_child
 
         def remove_helper(item, new_root=None):
             if new_root:
@@ -100,6 +109,7 @@ class BinarySearchTree:
                 self.parent = temp_root
                 self.parent_ref = temp_root.right_child
                 remove_helper(item, temp_root.right_child)
+
         remove_helper(item)
 
 
@@ -151,4 +161,5 @@ tree.add(7)
 print(tree.root.left_child.right_child.right_child.left_child.data)
 tree.remove(10)
 print(tree.find(10))
+
 
