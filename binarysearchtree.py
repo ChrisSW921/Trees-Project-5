@@ -1,4 +1,5 @@
-
+"""Binary search tree"""
+from recursioncounter import RecursionCounter
 
 class Node:
     def __init__(self, data=None, left_child=None, right_child=None):
@@ -16,17 +17,28 @@ class Node:
     def update_height(self):
         self.height = 0
 
-    # def __str__(self):
-    #     return "ok"
+    def __str__(self):
+        if self.is_leaf():
+            print(f"{self.data}--LEAF")
+        else:
+            print(self.data)
+
 
 
 class BinarySearchTree:
-    root = None
-    size = 0
+
+    def __init__(self):
+        self.size = 0
+        self.root = None
+
+
+    #Remove helper variables
+
     parent = None
     parent_ref = None
     search_parent = None
     count = 0
+    pre_order = []
 
     def is_empty(self):
         if self.root is None:
@@ -34,10 +46,15 @@ class BinarySearchTree:
         else:
             return False
 
+    def len_helper(self, counter=0):
+        if counter < 40:
+            self.len_helper(counter + 1)
+        else:
+            return self.size
+
     def __len__(self):
-        def len_helper(cursor, offset):
-            return 0
-        return 0
+        print("")
+
 
     def height(self):
         return 0
@@ -45,10 +62,11 @@ class BinarySearchTree:
     def __str__(self):
         def print_helper(cursor, offset):
             return 0
-        return "OK"
+
 
     def add(self, item):
         def add_helper(node):
+            RecursionCounter()
             if item < node.data:
                 if node.left_child is None:
                     node.left_child = Node(item)
@@ -67,7 +85,6 @@ class BinarySearchTree:
 
 
     def remove(self, item):
-        self.parent_ref = None
         self.parent = None
         self.search_parent = None
         self.count = 0
@@ -94,6 +111,7 @@ class BinarySearchTree:
                         self.search_parent.right_child = self.search_parent.right_child.left_child
 
         def remove_helper(item, new_root=None):
+            RecursionCounter()
             if new_root:
                 temp_root = new_root
             else:
@@ -102,29 +120,17 @@ class BinarySearchTree:
                 remove_helper_2(temp_root)
             elif item < temp_root.data:
                 self.parent = temp_root
-                self.parent_ref = temp_root.left_child
                 remove_helper(item, temp_root.left_child)
             elif item > temp_root.data:
                 self.parent = temp_root
-                self.parent_ref = temp_root.right_child
                 remove_helper(item, temp_root.right_child)
-
+        self.size -= 1
         remove_helper(item)
-
-
-
-
-
-
-
-
-
-
-
 
     def find(self, item):
 
         def find_helper(node):
+            RecursionCounter()
             if node is None:
                 return None
             elif item == node.data:
@@ -136,10 +142,29 @@ class BinarySearchTree:
 
         return find_helper(self.root)
 
+    def preorder_helper(self, node=None, iter=0):
+        RecursionCounter()
+        if iter == 0:
+            node = self.root
+            if node is None:
+                return
+            self.pre_order.append(node.data)
+            self.preorder_helper(node.left_child, 1)
+            self.preorder_helper(node.right_child, 1)
+
+        else:
+            if node is None:
+                return
+            self.pre_order.append(node.data)
+            self.preorder_helper(node.left_child, 1)
+            self.preorder_helper(node.right_child, 1)
+        return self.pre_order
+
     def preorder(self):
-        def preorder_helper(cursor, output):
-            return 0
-        return 0
+        self.preorder_helper()
+        temp = self.pre_order.copy()
+        self.pre_order.clear()
+        return temp
 
 
 tree = BinarySearchTree()
@@ -157,18 +182,22 @@ tree.add(10)
 tree.add(2)
 tree.add(3)
 tree.add(7)
-
+print(tree.preorder())
+print(tree.size)
 tree.remove(21)
 tree.remove(9)
 tree.remove(4)
 tree.remove(18)
 tree.remove(15)
 tree.remove(7)
-print(tree.root.data)
-print(tree.root.left_child.data)
-print(tree.root.left_child.left_child.data)
-print(tree.root.left_child.right_child.data)
-
-print(tree.root.right_child.data)
-print(tree.root.right_child.right_child.data)
-print(tree.root.right_child.right_child.left_child.data)
+print(tree.preorder())
+print(tree.len_helper())
+# print(tree.root.data)
+# print(tree.root.left_child.data)
+# print(tree.root.left_child.left_child.data)
+# print(tree.root.left_child.right_child.data)
+#
+# print(tree.root.right_child.data)
+# print(tree.root.right_child.right_child.data)
+# print(tree.root.right_child.right_child.left_child.data)
+#print(tree.preorder())
