@@ -53,13 +53,53 @@ class BinarySearchTree:
             pass
         return self.size
 
+    def height(self, start=None):
+        """Returns the height of the tree"""
+        lyst = []
+        if start is None:
+            start = self.root
 
-    def height(self):
-        return 0
+        def max_depth(node, count=0):
+            """Helper recursive function for the height function"""
+            RecursionCounter()
+            if node is None:
+                return 0
+            else:
+                lyst.append(count)
+                l_depth = (max_depth(node.left_child, count + 1))
+                r_depth = (max_depth(node.right_child, count + 1))
+                return max(lyst)
+
+        return max_depth(start)
 
     def __str__(self):
-        def print_helper(cursor, offset):
-            return 0
+        """Returns a string representation of the binary search tree"""
+
+        def str_helper(node, indent=0):
+            """Recursive helper function for the str method"""
+            result = ''
+            if node is not None:
+                item = str(node.data)
+                below = self.height(node)
+                tab = ''
+                for i in range(indent):
+                    tab += '\t'
+                result += tab + item
+                result += ' (' + str(below) + ')'
+                if below == 0:
+                    result += "[Leaf]"
+                result += '\n'
+                if node.left_child is None and below != 0:
+                    tab += '\t'
+                    result += tab + "[Empty]" + '\n'
+                result += str_helper(node.left_child, indent + 1)
+                if node.right_child is None and below != 0:
+                    tab += '\t'
+                    result += tab + "[Empty]" + '\n'
+                result += str_helper(node.right_child, indent + 1)
+            return result
+
+        return str_helper(self.root)
 
 
     def add(self, item):
@@ -180,6 +220,7 @@ tree.add(10)
 tree.add(2)
 tree.add(3)
 tree.add(7)
+print(tree)
 print(tree.preorder())
 print(tree.size)
 tree.remove(21)
@@ -199,3 +240,4 @@ print(len(tree))
 # print(tree.root.right_child.right_child.data)
 # print(tree.root.right_child.right_child.left_child.data)
 #print(tree.preorder())
+print(tree)
