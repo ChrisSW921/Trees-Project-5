@@ -46,14 +46,12 @@ class BinarySearchTree:
         else:
             return False
 
-    def len_helper(self, counter=0):
+    def __len__(self, counter=0):
         if counter < 40:
-            self.len_helper(counter + 1)
+            self.__len__(counter + 1)
         else:
-            return self.size
-
-    def __len__(self):
-        print("")
+            pass
+        return self.size
 
 
     def height(self):
@@ -191,7 +189,7 @@ tree.remove(18)
 tree.remove(15)
 tree.remove(7)
 print(tree.preorder())
-print(tree.len_helper())
+print(len(tree))
 # print(tree.root.data)
 # print(tree.root.left_child.data)
 # print(tree.root.left_child.left_child.data)
