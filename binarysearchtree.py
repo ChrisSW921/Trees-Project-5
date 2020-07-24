@@ -1,5 +1,6 @@
 """Binary search tree"""
 from recursioncounter import RecursionCounter
+from random import seed, sample
 
 class Node:
     def __init__(self, data=None, left_child=None, right_child=None):
@@ -48,6 +49,7 @@ class BinarySearchTree:
 
     def __len__(self, counter=0):
         if counter < 40:
+            RecursionCounter()
             self.__len__(counter + 1)
         else:
             pass
@@ -126,8 +128,9 @@ class BinarySearchTree:
         self.parent = None
         self.search_parent = None
         self.count = 0
-
+        RecursionCounter()
         def remove_helper_2(item):
+            RecursionCounter()
             if item.left_child and not item.right_child:
                 self.parent.left_child = item.left_child
             elif item.right_child and not item.left_child:
@@ -204,40 +207,9 @@ class BinarySearchTree:
         self.pre_order.clear()
         return temp
 
-
-tree = BinarySearchTree()
-
-tree.add(21)
-tree.add(26)
-tree.add(30)
-tree.add(9)
-tree.add(4)
-tree.add(14)
-tree.add(28)
-tree.add(18)
-tree.add(15)
-tree.add(10)
-tree.add(2)
-tree.add(3)
-tree.add(7)
-print(tree)
-print(tree.preorder())
-print(tree.size)
-tree.remove(21)
-tree.remove(9)
-tree.remove(4)
-tree.remove(18)
-tree.remove(15)
-tree.remove(7)
-print(tree.preorder())
-print(len(tree))
-# print(tree.root.data)
-# print(tree.root.left_child.data)
-# print(tree.root.left_child.left_child.data)
-# print(tree.root.left_child.right_child.data)
-#
-# print(tree.root.right_child.data)
-# print(tree.root.right_child.right_child.data)
-# print(tree.root.right_child.right_child.left_child.data)
-#print(tree.preorder())
-print(tree)
+# bst = BinarySearchTree()
+# data = sample(range(1, 400), k=20)
+# for datum in data:
+#     bst.add(datum)
+# for datum in data:
+#     bst.remove(datum)
