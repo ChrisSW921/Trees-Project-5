@@ -66,15 +66,15 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(len(output), 123)
         self.assertEqual(output[0], data[0])
 
-    # def test_string(self):
-    #     captured_output = io.StringIO()
-    #     sys.stdout = captured_output
-    #     mn()
-    #     sys.stdout = sys.__stdout__
-    #     data = "".join(captured_output.getvalue().split())
-    #
-    #     data1 = "21,9,4,2,3,7,14,10,18,15,26,30,28,21(4)9(3)4(2)2(1)[Empty]3(0)[leaf]7(0)[leaf]14(2)10(0)[leaf]18(1)15(0)[leaf][Empty]26(2)[Empty]30(1)28(0)[leaf][Empty]26(3)10(2)2(1)[Empty]3(0)[leaf]14(0)[leaf]30(1)28(0)[leaf][Empty]"
-    #     self.assertEqual(data, data1)
+    def test_string(self):
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+        mn()
+        sys.stdout = sys.__stdout__
+        data = "".join(captured_output.getvalue().split())
+
+        data1 = "21,9,4,2,3,7,14,10,18,15,26,30,28,21(4)9(3)4(2)2(1)[Empty]3(0)[leaf]7(0)[leaf]14(2)10(0)[leaf]18(1)15(0)[leaf][Empty]26(2)[Empty]30(1)28(0)[leaf][Empty]26(3)10(2)2(1)[Empty]3(0)[leaf]14(0)[leaf]30(1)28(0)[leaf][Empty]"
+        self.assertEqual(data, data1)
 
 class RecursionTests(unittest.TestCase):
     def test_recursive_add(self):
@@ -144,26 +144,26 @@ class RecursionTests(unittest.TestCase):
         
         
 
-# class TestCodeingStandards(unittest.TestCase):
-#     def test_code_quality(self):
-#         from pylint import epylint as lint
-#         (pylint_stdout, _) = lint.py_run("main.py", return_std=True)
-#         output = pylint_stdout.getvalue()
-#         offset = output.rfind(" been rated at ")
-#         if offset != -1:
-#             output = output[offset:]
-#             end = output.find('/')
-#             output = output[15:end]
-#             score = float(output)
-#             self.assertGreaterEqual(score, 8.5)
-#         (pylint_stdout, _) = lint.py_run("binarysearchtree.py", return_std=True)
-#         output = pylint_stdout.getvalue()
-#         offset = output.rfind(" been rated at ")
-#         if offset != -1:
-#             output = output[offset:]
-#             end = output.find('/')
-#             output = output[15:end]
-#             score = float(output)
-#             self.assertGreaterEqual(score, 8.5)
+class TestCodeingStandards(unittest.TestCase):
+    def test_code_quality(self):
+        from pylint import epylint as lint
+        (pylint_stdout, _) = lint.py_run("main.py", return_std=True)
+        output = pylint_stdout.getvalue()
+        offset = output.rfind(" been rated at ")
+        if offset != -1:
+            output = output[offset:]
+            end = output.find('/')
+            output = output[15:end]
+            score = float(output)
+            self.assertGreaterEqual(score, 8.5)
+        (pylint_stdout, _) = lint.py_run("binarysearchtree.py", return_std=True)
+        output = pylint_stdout.getvalue()
+        offset = output.rfind(" been rated at ")
+        if offset != -1:
+            output = output[offset:]
+            end = output.find('/')
+            output = output[15:end]
+            score = float(output)
+            self.assertGreaterEqual(score, 8.5)
 
 

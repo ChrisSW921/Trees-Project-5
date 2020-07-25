@@ -1,8 +1,9 @@
 from binarysearchtree import Node, BinarySearchTree
 
-def main():
-    tree = BinarySearchTree()
 
+def main():
+    """Main function"""
+    tree = BinarySearchTree()
     tree.add(21)
     tree.add(26)
     tree.add(30)
@@ -35,4 +36,5 @@ def main():
     print(tree)
 
 
-main()
+if __name__ == '__main__':
+    main()
