@@ -128,16 +128,16 @@ class BinarySearchTree:
         self.parent = None
         self.search_parent = None
         self.count = 0
-        RecursionCounter()
+        self.parent_ref = None
+        print(f"Removing {item}")
+        print(self)
         def remove_helper_2(item):
-            RecursionCounter()
             if item.left_child and not item.right_child:
-                self.parent.left_child = item.left_child
+                self.parent_ref = item.left_child
             elif item.right_child and not item.left_child:
-                self.parent.right_child = item.right_child
+                self.parent_ref = item.right_child
             elif not item.right_child and not item.left_child:
-                self.parent.right_child = None
-                self.parent.left_child = None
+                self.parent_ref = None
             else:
                 left = item.left_child
                 while left.right_child:
@@ -161,9 +161,11 @@ class BinarySearchTree:
                 remove_helper_2(temp_root)
             elif item < temp_root.data:
                 self.parent = temp_root
+                self.parent_ref = self.parent.left_child
                 remove_helper(item, temp_root.left_child)
             elif item > temp_root.data:
                 self.parent = temp_root
+                self.parent_ref = (self.parent.right_child)
                 remove_helper(item, temp_root.right_child)
         self.size -= 1
         remove_helper(item)
