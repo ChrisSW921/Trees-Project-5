@@ -1,8 +1,9 @@
 """Binary search tree"""
 from recursioncounter import RecursionCounter
-from random import seed, sample
+
 
 class Node:
+    """Node Class"""
     def __init__(self, data=None, left_child=None, right_child=None):
         self.data = data
         self.left_child = left_child
@@ -10,15 +11,15 @@ class Node:
         self.height = 0
 
     def is_leaf(self):
-        if not self.left_child and not self.right_child:
-            return True
-        else:
-            return False
+        """Checks if node is leaf"""
+        return not self.right_child and not self.left_child
 
     def update_height(self):
+        """Update height function"""
         self.height = 0
 
     def __str__(self):
+        """Prints a node"""
         if self.is_leaf():
             print(f"{self.data}--LEAF")
         else:
@@ -27,7 +28,7 @@ class Node:
 
 
 class BinarySearchTree:
-
+    """Binary Search Tree class"""
     def __init__(self):
         self.size = 0
         self.root = None
@@ -42,12 +43,14 @@ class BinarySearchTree:
     pre_order = []
 
     def is_empty(self):
+        """Checks if tree is empty"""
         if self.root is None:
             return True
         else:
             return False
 
     def __len__(self, counter=0):
+        """Length function"""
         if counter < 40:
             RecursionCounter()
             self.__len__(counter + 1)
@@ -105,7 +108,9 @@ class BinarySearchTree:
 
 
     def add(self, item):
+        """Add function"""
         def add_helper(node):
+            """Add helper"""
             RecursionCounter()
             if item < node.data:
                 if node.left_child is None:
@@ -125,13 +130,13 @@ class BinarySearchTree:
 
 
     def remove(self, item):
+        """Remove function"""
         self.parent = None
         self.search_parent = None
         self.count = 0
         self.parent_ref = None
-        print(f"Removing {item}")
-        print(self)
         def remove_helper_2(item):
+            """Remove helper 2"""
             if item.left_child and not item.right_child:
                 self.parent_ref = item.left_child
             elif item.right_child and not item.left_child:
@@ -152,6 +157,7 @@ class BinarySearchTree:
                         self.search_parent.right_child = self.search_parent.right_child.left_child
 
         def remove_helper(item, new_root=None):
+            """Recursive remove function"""
             RecursionCounter()
             if new_root:
                 temp_root = new_root
@@ -171,8 +177,10 @@ class BinarySearchTree:
         remove_helper(item)
 
     def find(self, item):
+        """Find function"""
 
         def find_helper(node):
+            """Find helper function"""
             RecursionCounter()
             if node is None:
                 return None
@@ -186,6 +194,7 @@ class BinarySearchTree:
         return find_helper(self.root)
 
     def preorder_helper(self, node=None, iter=0):
+        """Preorder helper function"""
         RecursionCounter()
         if iter == 0:
             node = self.root
@@ -194,7 +203,6 @@ class BinarySearchTree:
             self.pre_order.append(node.data)
             self.preorder_helper(node.left_child, 1)
             self.preorder_helper(node.right_child, 1)
-
         else:
             if node is None:
                 return
@@ -204,14 +212,8 @@ class BinarySearchTree:
         return self.pre_order
 
     def preorder(self):
+        """Preorder function"""
         self.preorder_helper()
         temp = self.pre_order.copy()
         self.pre_order.clear()
         return temp
-
-# bst = BinarySearchTree()
-# data = sample(range(1, 400), k=20)
-# for datum in data:
-#     bst.add(datum)
-# for datum in data:
-#     bst.remove(datum)
